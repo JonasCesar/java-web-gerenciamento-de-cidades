@@ -10,10 +10,10 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import jakarta.validation.Validator;
 
 @SpringBootApplication
-public class CurdCidadesApplication {
+public class CrudCidadesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CurdCidadesApplication.class, args);
+		SpringApplication.run(CrudCidadesApplication.class, args);
 	}
 	
 	@Bean
