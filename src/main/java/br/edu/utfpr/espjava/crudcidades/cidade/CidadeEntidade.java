@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity(name = "cidade")
 public class CidadeEntidade implements Serializable {
 	
 	private static final long serialVersionUID = 9196758125272340728L;
