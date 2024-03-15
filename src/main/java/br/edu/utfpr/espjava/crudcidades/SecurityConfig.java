@@ -16,14 +16,14 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
 	// criar os usuários programaticamente
-	@Bean
+	/* @Bean
 	public InMemoryUserDetailsManager configure() throws Exception {
 		UserDetails john = User.withUsername("john").password(cifrador().encode("test123")).roles("listar").build();
 
 		UserDetails anna = User.withUsername("anna").password(cifrador().encode("test123")).roles("admin").build();
 
 		return new InMemoryUserDetailsManager(john, anna);
-	}
+	} */
 
 	// configurando autorização
 	@Bean
