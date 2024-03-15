@@ -36,7 +36,8 @@ public class SecurityConfig {
 				.requestMatchers("/criar", "/excluir", "/alterar", "/preparaAlterar").hasRole("admin")
 				.anyRequest().denyAll())
 				.formLogin(login -> login
-					.permitAll())
+					.loginPage("/login.html").permitAll())	
+				.logout(logout -> logout.permitAll())
 				.build();
 		
 	}
