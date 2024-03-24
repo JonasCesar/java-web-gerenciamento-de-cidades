@@ -1,9 +1,9 @@
 package br.edu.utfpr.espjava.crudcidades.usuario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -63,10 +63,15 @@ public class Usuario implements Serializable,  UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.papeis
-				.stream()
-				.map(papelAtual -> new SimpleGrantedAuthority("ROLE_" + papelAtual))
-				.collect(Collectors.toList());
+//		return this.papeis
+//				.stream()
+//				.map(papelAtual -> new SimpleGrantedAuthority("ROLE_" + papelAtual))
+//				.collect(Collectors.toList());
+		List<SimpleGrantedAuthority> papeis = new ArrayList<>();
+		this.papeis.forEach(papelAtual -> {
+			papeis.add(new SimpleGrantedAuthority("ROLE_" + papelAtual));
+		});
+		return papeis;
 	}
 
 	@Override

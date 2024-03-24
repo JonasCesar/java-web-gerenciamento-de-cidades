@@ -2,13 +2,12 @@ package br.edu.utfpr.espjava.crudcidades;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.EventListener;
+import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
@@ -34,6 +33,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests((authorize) -> authorize
 				.requestMatchers("/").hasAnyRole("listar", "admin")
 				.requestMatchers("/criar", "/excluir", "/alterar", "/preparaAlterar").hasRole("admin")
+				.requestMatchers("/mostrar").authenticated()
 				.anyRequest().denyAll())
 				.formLogin(login -> login
 					.loginPage("/login.html").permitAll())	
@@ -46,6 +46,12 @@ public class SecurityConfig {
 	@Bean
 	public PasswordEncoder cifrador() {
 		return new BCryptPasswordEncoder();
+	}
+	
+	@EventListener(InteractiveAuthenticationSuccessEvent.class)
+	public void printUsuarioAtual(InteractiveAuthenticationSuccessEvent event) {
+		String usuario = event.getAuthentication().getName();
+		System.out.println(usuario);
 	}
 
 }
